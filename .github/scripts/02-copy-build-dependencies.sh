@@ -27,7 +27,11 @@ if [[ ${GITHUB_REF} =~ "release" || ${FORCEBUILDDEPS} = "1" ]]; then
     if [[ ${OS} == "windows" ]]; then
         make HOST=x86_64-w64-mingw32 -j2
     elif [[ ${OS} == "osx" ]]; then
-        make HOST=x86_64-apple-darwin14 -j2
+        cd ${GITHUB_WORKSPACE}
+        wget https://github.com/phracker/MacOSX-SDKs/releases/download/11.3/MacOSX10.11.sdk.tar.xz
+        mkdir -p ${GITHUB_WORKSPACE}/depends/SDKs
+        cd ${GITHUB_WORKSPACE}/depends/SDKs && tar -xf ${GITHUB_WORKSPACE}/MacOSX10.11.sdk.tar.xz
+        cd ${GITHUB_WORKSPACE}/depends && make HOST=x86_64-apple-darwin14 -j2
     elif [[ ${OS} == "linux" || ${OS} == "linux-disable-wallet" ]]; then
         make HOST=x86_64-linux-gnu -j2
     elif [[ ${OS} == "arm32v7" || ${OS} == "arm32v7-disable-wallet" ]]; then
