@@ -3,7 +3,8 @@ name: Build Fren
 on:
   push:
     branches:
-      - release*
+      - master
+      - 'releases/**'
   pull_request:
     branches:
       - master
@@ -26,7 +27,7 @@ env:
 jobs:
   check-jobs:
       # continue-on-error: true # Uncomment once integration is finished
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     # Map a step output to a job output
     outputs:
       should_skip: ${{ steps.skip_check.outputs.should_skip }}
@@ -52,16 +53,16 @@ jobs:
 
   build:
     needs: check-jobs
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-       OS: [ 'windows', 'linux', 'linux-disable-wallet', 'arm32v7', 'arm32v7-disable-wallet', 'aarch64', 'aarch64-disable-wallet' ]
-#       OS: [ 'windows', 'linux', 'linux-disable-wallet', 'osx', 'arm32v7', 'arm32v7-disable-wallet' ]
+#       OS: [ 'windows', 'linux', 'linux-disable-wallet', 'arm32v7', 'arm32v7-disable-wallet', 'aarch64', 'aarch64-disable-wallet' ]
+       OS: [ 'windows', 'linux' ]
 
     steps:
     - if: ${{ needs.check-jobs.outputs.should_skip != 'true' }}
       name: Checkout the Code
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
 
     - if: ${{ needs.check-jobs.outputs.should_skip != 'true' }}
       name: Install Build Tools

@@ -23,7 +23,7 @@ jobs:
 
     steps:
     - name: Checkout the Code
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
 
     - name: Install Build Tools
       run: sudo ${SCRIPTS}/00-install-deps.sh ${OS}
@@ -31,12 +31,12 @@ jobs:
     - name: Copy the Xcode Dependency Files
       run: |
           cd ${{ GITHUB.WORKSPACE }}
-          curl -O https://fren-build-resources.s3.amazonaws.com/osx/MacOSX10.11.sdk.tar.gz
+          wget https://github.com/phracker/MacOSX-SDKs/releases/download/11.3/MacOSX10.11.sdk.tar.xz
 
     - name: Extract Xcode Resources
       run: |
           mkdir -p ${{ GITHUB.WORKSPACE }}/depends/SDKs
-          cd ${{ GITHUB.WORKSPACE }}/depends/SDKs && tar -zxf ${{ GITHUB.WORKSPACE }}/MacOSX10.11.sdk.tar.gz
+          cd ${{ GITHUB.WORKSPACE }}/depends/SDKs && tar -xf ${{ GITHUB.WORKSPACE }}/MacOSX10.11.sdk.tar.xz
 
     - name: Build the Dependencies
       run: cd ${{ GITHUB.WORKSPACE }}/depends && make HOST=x86_64-apple-darwin14 -j2

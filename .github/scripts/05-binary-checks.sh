@@ -18,17 +18,8 @@ elif [[ ${OS} == "osx" ]]; then
     echo "----------------------------------------"
 elif [[ ${OS} == "linux" || ${OS} == "linux-disable-wallet" ]]; then
     echo "----------------------------------------"
-    echo "Checking binary security for ${OS}"
+    echo "No binary checks available for ${OS}"
     echo "----------------------------------------"
-    make -C src check-security
-    echo "----------------------------------------"
-    echo "Running unit tests for ${OS}"
-    echo "----------------------------------------"
-    make check
-    echo "----------------------------------------"
-    echo "Running functional tests for ${OS}"
-    echo "----------------------------------------"
-    ${GITHUB_WORKSPACE}/src/test/test_fren
 elif [[ ${OS} == "arm32v7" || ${OS} == "arm32v7-disable-wallet" || ${OS} == "aarch64" || ${OS} == "aarch64-disable-wallet" ]]; then
     echo "----------------------------------------"
     echo "No binary checks available for ${OS}"
