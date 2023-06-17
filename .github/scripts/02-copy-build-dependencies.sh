@@ -28,20 +28,9 @@ if [[ ${GITHUB_REF} =~ "release" || ${FORCEBUILDDEPS} = "1" ]]; then
         make HOST=x86_64-w64-mingw32 -j2
     elif [[ ${OS} == "osx" ]]; then
         cd ${GITHUB_WORKSPACE}
-        # curl -O <url>
-        echo "LEGAL issues with OSX SDK, need to get it yourself and extract the valuable stuff."
-        echo "See github -> contrib/macdeploy/README.md"
-        echo "Countdown from 3 sec. Make sure your SDK is at /tmp/SDKs and it is the only *.tar.gz file."
-        echo "3..."
-        sleep 1
-        echo "2..."
-        sleep 1
-        echo "1..."
-        sleep 1
-        echo "0.. continuing.."
-        mkdir -p ${GITHUB_WORKSPACE}/depends/SDKs 
-        cd  ${GITHUB_WORKSPACE}/depends/SDKs
-        tar -zxf /tmp/SDKs/*.tar.gz
+        wget https://github.com/phracker/MacOSX-SDKs/releases/download/11.3/MacOSX10.11.sdk.tar.xz
+        mkdir -p ${GITHUB_WORKSPACE}/depends/SDKs
+        cd ${GITHUB_WORKSPACE}/depends/SDKs && tar -xf ${GITHUB_WORKSPACE}/MacOSX10.11.sdk.tar.xz
         cd ${GITHUB_WORKSPACE}/depends && make HOST=x86_64-apple-darwin14 -j2
     elif [[ ${OS} == "linux" || ${OS} == "linux-disable-wallet" ]]; then
         make HOST=x86_64-linux-gnu -j2
@@ -56,8 +45,8 @@ else
     echo "----------------------------------------"
 
     cd /tmp
-    curl -O https://fren-build-resources.s3.amazonaws.com/${OS}/fren-${OS}-dependencies.tar.gz
-    curl -O https://fren-build-resources.s3.amazonaws.com/${OS}/SHASUM
+    curl -O https://raven-build-resources.s3.amazonaws.com/${OS}/fren-${OS}-dependencies.tar.gz
+    curl -O https://raven-build-resources.s3.amazonaws.com/${OS}/SHASUM
     if [[ $(sha256sum -c /tmp/SHASUM) ]]; then
         cd ${GITHUB_WORKSPACE}/depends
         tar zxvf /tmp/fren-${OS}-dependencies.tar.gz
