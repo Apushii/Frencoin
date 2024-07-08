@@ -165,10 +165,10 @@ public:
 
 
         // The best chain should have at least this much work
-        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000000002c5ffc057edd952"); // Block 579685
+        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000000006624f6ad0a2d554"); // Block 1220162
 
         // By default assume that the signatures in ancestors of this block are valid. 
-        consensus.defaultAssumeValid = uint256S("0x0000000000031fa705b341270aeca4ba3d33c0aa49a8d23a759cded49e8baab2"); // Block 579685
+        consensus.defaultAssumeValid = uint256S("0x00000000013a474999cfa60ededb13b8c1f20d1f1031671af868cac691caa8df"); // Block 1220162
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -223,7 +223,8 @@ public:
                 { 83249, uint256S("0x0000000007aa01e5f0d42771ceb9826ec210bd3d90c3d9488808ed448e80a0a5")},
                 { 145745, uint256S("0x000000000210c2769f7c0c4ff9f068ccfe619ce60751f91c41e8bc1763c1ebe1")},
                 { 279479, uint256S("0x0000000001117ac273717953ea216bc8ec05117706a669b3b1ca6dd0ef531dca")},
-                { 579685, uint256S("0000000000031fa705b341270aeca4ba3d33c0aa49a8d23a759cded49e8baab2")}
+                { 579685, uint256S("0x0000000000031fa705b341270aeca4ba3d33c0aa49a8d23a759cded49e8baab2")},
+                { 1220162, uint256S("0x00000000013a474999cfa60ededb13b8c1f20d1f1031671af868cac691caa8df")}
             }
         };
 
@@ -231,10 +232,10 @@ public:
         chainTxData = ChainTxData{
             // Update as we know more about the contents of the Fren chain
             // Stats as of 
-            1701034861, // * UNIX timestamp of last known number of transactions
-            899263,    // * total number of transactions between genesis and that timestamp
+            1720394570, // * UNIX timestamp of last known number of transactions
+            1709258,    // * total number of transactions between genesis and that timestamp
                         //   getchaintxstats(the tx=... number in the SetBestChain debug.log lines)
-            0.052       // * estimated number of transactions per second after that timestamp
+            0.0378       // * estimated number of transactions per second after that timestamp
         };
 
         /** FRENS Start **/
